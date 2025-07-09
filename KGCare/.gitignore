@@ -1,2 +1,53 @@
-**/__pycache__
-**/archive
+# Ignore all .env files
+*.env
+
+# Ignore log files
+*.log
+
+# Ignore build output directory
+output/
+outputs/
+pack/
+UniEval-main/
+csvs/
+storage/
+data_rag_llamaindex/
+pack/
+checkpoints/
+
+# Ignore temporary files
+*.tmp
+*.swp
+
+# Ignore specific file in a directory
+data/dev_10.json
+data/documents_10.json
+
+# Ignore all files in directory
+data/paul_graham/
+data/docs_10/
+data/docs/
+data/docs1/
+data/docs_dev_all_manual_kg/
+data/docs_dev_gold/
+data/docs_dev_manual_kg/
+data/other_datasets/
+data/docs_dev_span_manual_kg/
+data/docs_dev_yes_no_manual_kg/
+__pycache__
+Conditional_QA_classifier_model/
+data/dev_qt_pred.json
+data/dev_qt_predictions.json
+dev_qt.json
+dev_span_10.json
+train_qt.json
+
+
+
+#test code
+CQA_Llamaindex.ipynb
+llamaindex_exp.ipynb
+RAG_CQA.ipynb
+RAG_test.ipynb
+ConditionalQA.ipynb
+manual_prompt.ipynb
