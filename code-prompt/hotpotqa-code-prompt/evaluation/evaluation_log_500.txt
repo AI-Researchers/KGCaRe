@@ -1,0 +1,91 @@
+Evaluating predictions in folder: ./prediction_results
+Using gold file: ../data/HotpotQA/stratified_hotpotqa_500sample_with_tag.json
+---------------------------------------------------
+Evaluating file: ./prediction_results/Codeprompt_gpt35_output_reformatted_500sample.json
+{'joint': {'em': 0.438,
+           'f1': 0.5411404040404043,
+           'prec': 0.5591617171717174,
+           'recall': 0.5536666666666668},
+ 'span': {'em': 0.4168421052631579,
+          'f1': 0.5254109516214781,
+          'prec': 0.5443807549175972,
+          'recall': 0.5385964912280703},
+ 'yes/no': {'em': 0.84, 'f1': 0.84, 'prec': 0.84, 'recall': 0.84}}
+---------------------------------------------------
+Evaluating file: ./prediction_results/Codeprompt_gpt4o_output_reformatted_500sample.json
+{'joint': {'em': 0.54,
+           'f1': 0.6882072971925266,
+           'prec': 0.7079115705931497,
+           'recall': 0.7161714285714287},
+ 'span': {'em': 0.52,
+          'f1': 0.6760076812552912,
+          'prec': 0.6967490216769997,
+          'recall': 0.7054436090225565},
+ 'yes/no': {'em': 0.92, 'f1': 0.92, 'prec': 0.92, 'recall': 0.92}}
+---------------------------------------------------
+Evaluating file: ./prediction_results/Codeprompt_ms_output_reformatted_500sample.json
+{'joint': {'em': 0.04,
+           'f1': 0.09685637696862891,
+           'prec': 0.08229691520434224,
+           'recall': 0.20063730158730167},
+ 'span': {'em': 0.042105263157894736,
+          'f1': 0.10195408101960937,
+          'prec': 0.08662833179404446,
+          'recall': 0.2111971595655807},
+ 'yes/no': {'em': 0.0, 'f1': 0.0, 'prec': 0.0, 'recall': 0.0}}
+---------------------------------------------------
+Evaluating file: ./prediction_results/Codeprompt_mx_output_reformatted_500sample.json
+{'joint': {'em': 0.062,
+           'f1': 0.11069555106939229,
+           'prec': 0.10312704533691884,
+           'recall': 0.1705857142857143},
+ 'span': {'em': 0.05052631578947368,
+          'f1': 0.1017847905993603,
+          'prec': 0.09381794245991457,
+          'recall': 0.16482706766917296},
+ 'yes/no': {'em': 0.28, 'f1': 0.28, 'prec': 0.28, 'recall': 0.28}}
+---------------------------------------------------
+Evaluating file: ./prediction_results/Textprompt_gpt35_output_reformatted_500sample.json
+{'joint': {'em': 0.462,
+           'f1': 0.602341955433711,
+           'prec': 0.6037029008922113,
+           'recall': 0.6618333333333334},
+ 'span': {'em': 0.44,
+          'f1': 0.5877283741407485,
+          'prec': 0.5891609483075909,
+          'recall': 0.6503508771929825},
+ 'yes/no': {'em': 0.88, 'f1': 0.88, 'prec': 0.88, 'recall': 0.88}}
+---------------------------------------------------
+Evaluating file: ./prediction_results/Textprompt_gpt4o_output_reformatted_500sample.json
+{'joint': {'em': 0.456,
+           'f1': 0.6506920415634158,
+           'prec': 0.6233927656687941,
+           'recall': 0.8252444444444444},
+ 'span': {'em': 0.4357894736842105,
+          'f1': 0.6407284648035955,
+          'prec': 0.6119923849145201,
+          'recall': 0.8244678362573099},
+ 'yes/no': {'em': 0.84, 'f1': 0.84, 'prec': 0.84, 'recall': 0.84}}
+---------------------------------------------------
+Evaluating file: ./prediction_results/Textprompt_ms_output_reformatted_500sample.json
+{'joint': {'em': 0.028,
+           'f1': 0.1693824899667718,
+           'prec': 0.122267057435169,
+           'recall': 0.4067603174603176},
+ 'span': {'em': 0.02736842105263158,
+          'f1': 0.17619209470186506,
+          'prec': 0.12659690256333578,
+          'recall': 0.4260634920634922},
+ 'yes/no': {'em': 0.04, 'f1': 0.04, 'prec': 0.04, 'recall': 0.04}}
+---------------------------------------------------
+Evaluating file: ./prediction_results/Textprompt_mx_output_reformatted_500sample.json
+{'joint': {'em': 0.08,
+           'f1': 0.22350732154661335,
+           'prec': 0.1829853961913562,
+           'recall': 0.4428285714285715},
+ 'span': {'em': 0.07368421052631578,
+          'f1': 0.22474454899643512,
+          'prec': 0.1820898907277434,
+          'recall': 0.4556090225563911},
+ 'yes/no': {'em': 0.2, 'f1': 0.2, 'prec': 0.2, 'recall': 0.2}}
+---------------------------------------------------

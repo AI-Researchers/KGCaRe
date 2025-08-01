@@ -1,0 +1,213 @@
+[
+    {
+        "_id": "custom_001",
+        "answer": "no",
+        "question": "Are the Hagley Museum and the Franklin Institute located in the same city?",
+        "supporting_facts": [
+            [
+            "Hagley Museum",
+            0
+            ],
+            [
+            "Franklin Institute",
+            0
+            ]
+        ],
+        "context": [
+            [
+            "Hagley Museum",
+            [
+                "The Hagley Museum and Library is a nonprofit educational institution in Wilmington, Delaware.",
+                "It covers the history of American enterprise and the legacy of the DuPont company."
+            ]
+            ],
+            [
+            "Franklin Institute",
+            [
+                "The Franklin Institute is a science museum and the center of science education and research in Philadelphia, Pennsylvania.",
+                "It is one of the oldest centers of science education in the United States, founded in 1824."
+            ]
+            ],
+            [
+            "Wilmington, Delaware",
+            [
+                "Wilmington is the largest city in the state of Delaware and is located at the confluence of the Christina River and Brandywine Creek."
+            ]
+            ],
+            [
+            "Philadelphia",
+            [
+                "Philadelphia is the largest city in Pennsylvania, known for its rich historical heritage and as the location of Independence Hall and the Liberty Bell."
+            ]
+            ]
+        ],
+        "type": "comparison",
+        "level": "hard"
+    },
+    {
+        "_id": "custom_002",
+        "answer": "yes",
+        "question": "Are Haruki Murakami and Gabriel García Márquez both novelists?",
+        "supporting_facts": [
+            [
+            "Haruki Murakami",
+            0
+            ],
+            [
+            "Gabriel García Márquez",
+            0
+            ]
+        ],
+        "context": [
+            [
+            "Haruki Murakami",
+            [
+                "Haruki Murakami (born January 12, 1949) is a Japanese writer known for his blend of magical realism and melancholy themes.",
+                "His best-known novels include 'Norwegian Wood', 'Kafka on the Shore', and '1Q84'.",
+                "Murakami’s works have been bestsellers in Japan and internationally, and he is considered one of the most influential contemporary novelists."
+            ]
+            ],
+            [
+            "Gabriel García Márquez",
+            [
+                "Gabriel García Márquez (March 6, 1927 – April 17, 2014) was a Colombian novelist and Nobel Prize winner in Literature, renowned for his use of magical realism.",
+                "His most famous works include 'One Hundred Years of Solitude' and 'Love in the Time of Cholera'.",
+                "García Márquez was a central figure in the Latin American literary boom of the 20th century."
+            ]
+            ],
+            [
+            "Magical realism",
+            [
+                "Magical realism is a literary genre in which magical elements are blended into a realistic atmosphere to access a deeper understanding of reality.",
+                "Writers like Gabriel García Márquez and Haruki Murakami are often associated with this genre."
+            ]
+            ],
+            [
+            "Nobel Prize in Literature",
+            [
+                "The Nobel Prize in Literature is a prestigious international award presented annually by the Swedish Academy to an author who has produced outstanding literary work.",
+                "Gabriel García Márquez won the Nobel Prize in 1982."
+            ]
+            ]
+        ],
+        "type": "comparison",
+        "level": "hard"
+    },
+    {
+        "_id": "custom_003",
+        "answer": "T.S. Eliot",
+        "question": "Which poet was born in the United States, W.H. Auden or T.S. Eliot?",
+        "supporting_facts": [
+            [
+                "W. H. Auden",
+                0
+            ],
+            [
+                "T. S. Eliot",
+                0
+            ]
+        ],
+        "context": [
+            [
+                "W. H. Auden",
+                [
+                    "Wystan Hugh Auden (21 February 1907 – 29 September 1973) was an English-American poet.",
+                    " He was born in York, England, and later became a U.S. citizen in 1946.",
+                    " His poetry is noted for its stylistic and technical achievements."
+                ]
+            ],
+            [
+                "T. S. Eliot",
+                [
+                    "Thomas Stearns Eliot (26 September 1888 – 4 January 1965) was an American-born poet, essayist, publisher, and playwright.",
+                    " He was born in St. Louis, Missouri, in the United States, and became a British citizen in 1927.",
+                    " He is considered one of the 20th century's major poets, known for works like 'The Waste Land' and 'Four Quartets'."
+                ]
+            ],
+            [
+                "St. Louis, Missouri",
+                [
+                    "St. Louis is a city located in the state of Missouri in the United States.",
+                    " It is known for its cultural history, including being the birthplace of the poet T. S. Eliot."
+                ]
+            ],
+            [
+                "Naturalization Act of 1946",
+                [
+                    "The Naturalization Act of 1946 allowed foreign-born residents in the United States to apply for citizenship under revised criteria.",
+                    " W. H. Auden was among those who became a naturalized American citizen under this law."
+                ]
+            ],
+            [
+                "Modernist poetry",
+                [
+                    "Modernist poetry is characterized by a break with traditional forms and an emphasis on experimentation.",
+                    " Both T. S. Eliot and W. H. Auden are widely regarded as influential figures in this literary movement."
+                ]
+            ]
+        ],
+        "type": "comparison",
+        "level": "hard"
+    },
+    {
+        "_id": "custom_004",
+        "answer": "United States Ambassador to Czechoslovakia",
+        "question": "What diplomatic position was held by the actress who portrayed the character Emily Webb in the film Our Town (1940)?",
+        "supporting_facts": [
+            [
+                "Our Town (1940 film)",
+                0
+            ],
+            [
+                "Martha Scott",
+                0
+            ],
+            [
+                "Martha Scott",
+                1
+            ]
+        ],
+        "context": [
+            [
+                "Our Town (1940 film)",
+                [
+                    "Our Town is a 1940 American drama film adaptation of the Thornton Wilder play of the same name.",
+                    " The film stars William Holden as George Gibbs and Martha Scott as Emily Webb.",
+                    " The screenplay was adapted by Harry Chandlee and Frank Craven, and the film was directed by Sam Wood."
+                ]
+            ],
+            [
+                "Martha Scott",
+                [
+                    "Martha Ellen Scott (September 22, 1912 – May 28, 2003) was an American actress best known for originating the role of Emily Webb in the original Broadway production of 'Our Town' and reprising the role in the 1940 film adaptation.",
+                    " Later in life, she became active in politics and diplomacy, and in 1977, she was appointed United States Ambassador to Czechoslovakia."
+                ]
+            ],
+            [
+                "United States Ambassador to Czechoslovakia",
+                [
+                    "The United States Ambassador to Czechoslovakia was the official representative of the United States to the government of Czechoslovakia until the country split into the Czech Republic and Slovakia in 1993.",
+                    " Among its appointees have been both career diplomats and public figures from outside the foreign service."
+                ]
+            ],
+            [
+                "Thornton Wilder",
+                [
+                    "Thornton Wilder was an American playwright and novelist, known for writing 'Our Town', which premiered in 1938 and won the Pulitzer Prize for Drama.",
+                    " The story of small-town life was later adapted into a 1940 film starring Martha Scott."
+                ]
+            ],
+            [
+                "American Film Institute",
+                [
+                    "The American Film Institute (AFI) is a non-profit organization dedicated to preserving the history of film and honoring artists within the industry.",
+                    " AFI recognized Martha Scott for her dual contributions to American film and public service in its 1998 tribute series."
+                ]
+            ]
+        ],
+        "type": "bridge",
+        "level": "hard"
+    }
+
+
+]

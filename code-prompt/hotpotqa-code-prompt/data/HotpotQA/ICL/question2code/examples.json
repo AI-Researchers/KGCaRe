@@ -1,0 +1,18 @@
+[
+    {
+        "question": "Are the Hagley Museum and the Franklin Institute located in the same city?",
+        "code": "# Question: Are the Hagley Museum and the Franklin Institute located in the same city?\nhagley_museum_city = \"Wilmington\"\nfranklin_institute_city = \"Philadelphia\"\nsame_city = hagley_museum_city == franklin_institute_city"
+    },
+    {
+        "question": "Are Haruki Murakami and Gabriel García Márquez both novelists?",
+        "code": "# Question: Are Haruki Murakami and Gabriel García Márquez both novelists?\nharuki_murakami_profession = \"novelist\"\ngabriel_garcia_marquez_profession = \"novelist\"\nboth_novelists = haruki_murakami_profession == \"novelist\" and gabriel_garcia_marquez_profession == \"novelist\""
+    },
+    {
+        "question": "Which poet was born in the United States, W.H. Auden or T.S. Eliot?",
+        "code": "# Question: Which poet was born in the United States, W.H. Auden or T.S. Eliot?\nauden_birth_country = \"England\"\neliot_birth_country = \"United States\"\npoet_born_in_us = \"T.S. Eliot\" if eliot_birth_country == \"United States\" else (\"W.H. Auden\" if auden_birth_country == \"United States\" else None)"
+    },
+    {
+        "question": "What diplomatic position was held by the actress who portrayed the character Emily Webb in the film Our Town (1940)?",
+        "code": "# Question: What diplomatic position was held by the actress who portrayed the character Emily Webb in the film Our Town (1940)?\nemily_webb_actress = \"Martha Scott\"\nmartha_scott_diplomatic_position = None # No known diplomatic position held by Martha Scott"
+    }
+]
