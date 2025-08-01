@@ -1,8 +1,9 @@
-# ComplexQA
+# KGCaRe
 
 ## Overview
 
-This project implements a proposed hybrid approch called **HybridContexQA** designed for **Complex Conditional Question Answering (QA)** tasks. It leverages various machine learning and natural language processing techniques, including Large Language Models (LLMs), Knowledge Graphs (KGs), and Vector Stores, to provide accurate and context-aware answers to complex questions. The system is highly customizable and supports different LLM frameworks, retrieval strategies, and indexing techniques.
+This project implements a proposed hybrid approch called **KGCaRe** (**K**nowledge **G**raph **C**ontext **a**ware **R**easoning for
+complex Question Answering) designed for **Complex Conditional Question Answering (QA)** tasks. It leverages various machine learning and natural language processing techniques, including Large Language Models (LLMs), Knowledge Graphs (KGs), and Vector Stores, to provide accurate and context-aware answers to complex questions. The system is highly customizable and supports different LLM frameworks, retrieval strategies, and indexing techniques.
 
 ## Features
 
