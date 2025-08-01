@@ -1,0 +1,47 @@
+Evaluating predictions in folder: ./prediction_results
+Using gold file: ../data/stratified_hotpotqa_500sample_with_tag.json
+---------------------------------------------------
+Evaluating file: ./prediction_results/Tog_gpt35_output_reformatted_500sample.json
+{'joint': {'em': 0.07,
+           'f1': 0.14323750009671202,
+           'prec': 0.12468505797353974,
+           'recall': 0.2725619047619049},
+ 'span': {'em': 0.06526315789473684,
+          'f1': 0.14235526325969686,
+          'prec': 0.12282637681425236,
+          'recall': 0.2784862155388472},
+ 'yes/no': {'em': 0.16, 'f1': 0.16, 'prec': 0.16, 'recall': 0.16}}
+---------------------------------------------------
+Evaluating file: ./prediction_results/Tog_gpt4o_output_reformatted_500sample.json
+{'joint': {'em': 0.026,
+           'f1': 0.10794659315653653,
+           'prec': 0.07931150203590105,
+           'recall': 0.33640238095238095},
+ 'span': {'em': 0.02736842105263158,
+          'f1': 0.11362799279635423,
+          'prec': 0.08348579161673796,
+          'recall': 0.35410776942355887},
+ 'yes/no': {'em': 0.0, 'f1': 0.0, 'prec': 0.0, 'recall': 0.0}}
+---------------------------------------------------
+Evaluating file: ./prediction_results/Tog_ms_output_reformatted_500sample.json
+{'joint': {'em': 0.006,
+           'f1': 0.047604659794136354,
+           'prec': 0.031272183289459306,
+           'recall': 0.27729126984126995},
+ 'span': {'em': 0.004210526315789474,
+          'f1': 0.048004905046459316,
+          'prec': 0.03081282451522032,
+          'recall': 0.289780284043442},
+ 'yes/no': {'em': 0.04, 'f1': 0.04, 'prec': 0.04, 'recall': 0.04}}
+---------------------------------------------------
+Evaluating file: ./prediction_results/Tog_mx_output_reformatted_500sample.json
+{'joint': {'em': 0.004,
+           'f1': 0.048703487865661435,
+           'prec': 0.02987004714044564,
+           'recall': 0.395392857142857},
+ 'span': {'em': 0.004210526315789474,
+          'f1': 0.05126682933227519,
+          'prec': 0.03144215488467962,
+          'recall': 0.41620300751879685},
+ 'yes/no': {'em': 0.0, 'f1': 0.0, 'prec': 0.0, 'recall': 0.0}}
+---------------------------------------------------
