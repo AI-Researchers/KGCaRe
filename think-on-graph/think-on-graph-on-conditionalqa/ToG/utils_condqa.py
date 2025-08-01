@@ -40,18 +40,6 @@ def initialise_llama2(temperature, max_tokens):
 def initialise_mixtral(temperature, max_tokens):
     print("--initialising Mixtral")
     global llm
-    # llm = VLLM(
-    #         # model = "TheBloke/Mixtral-8x7B-Instruct-v0.1-GPTQ",
-    #         model = "mistralai/Mixtral-8x7B-Instruct-v0.1",
-    #         trust_remote_code=True,  
-    #         dtype="float16",
-    #         max_new_tokens=max_tokens,
-    #         top_k=-1,
-    #         top_p=0.95,
-    #         temperature=temperature,
-    #         repetition_penalty=1.1,
-    #         return_full_text=False
-    #     )
     inference_server_url = "http://localhost:8000/v1"
     llm = ChatOpenAI(
         model="mistralai/Mixtral-8X7B-Instruct-v0.1",
@@ -89,32 +77,6 @@ def initialise_gpt(temperature, max_tokens, opeani_api_keys, model_name):
     timeout=60 * 3,
 )
 
-def retrieve_top_docs(query, docs, model, width=3):
-    """
-    Retrieve the topn most relevant documents for the given query.
-
-    Parameters:
-    - query (str): The input query.
-    - docs (list of str): The list of documents to search from.
-    - model_name (str): The name of the SentenceTransformer model to use.
-    - width (int): The number of top documents to return.
-
-    Returns:
-    - list of float: A list of scores for the topn documents.
-    - list of str: A list of the topn documents.
-    """
-
-    query_emb = model.encode(query)
-    doc_emb = model.encode(docs)
-
-    scores = util.dot_score(query_emb, doc_emb)[0].cpu().tolist()
-
-    doc_score_pairs = sorted(list(zip(docs, scores)), key=lambda x: x[1], reverse=True)
-
-    top_docs = [pair[0] for pair in doc_score_pairs[:width]]
-    top_scores = [pair[1] for pair in doc_score_pairs[:width]]
-
-    return top_docs, top_scores
 
 def if_all_zero(topn_scores):
     return all(score == 0 for score in topn_scores)
@@ -226,7 +188,6 @@ def clean_scores(string, entity_candidates):
     if len(scores) == len(entity_candidates):
         return scores
     else:
-        # print("All entities are created equal.")
         return [1/len(entity_candidates)] * len(entity_candidates)
     
 def save_2_jsonl(question, answer, cluster_chain_of_entities, file_name, ans_from, qid, question_type, prompt_template):
@@ -249,8 +210,6 @@ def if_true(prompt):
     return False
 
 def generate_without_explored_paths(question, args, question_type):
-    # print("!! Answer without KG !!!")
-    # prompt = cot_prompt + "\n\nQ: " + question + "\nA:"
     if question_type == "Yes/no":
         prompt = condaqa_yn_ans_without_kg_prompt + "\n\nQuestion: " + question + "\nOutput:"
         prompt_template = "condaqa_yn_ans_without_kg_prompt"
@@ -265,7 +224,6 @@ def generate_without_explored_paths(question, args, question_type):
         prompt_template = "condaqa_span_ans_cond_without_kg_prompt"
 
     if (args.LLM_type).startswith("gpt"):
-        # response = run_llm(prompt, args.temperature_reasoning, args.max_length, args.opeani_api_keys, args.LLM_type)
         response = run_gpt(prompt)
     elif args.LLM_type == "llama3":
         response = run_llama3(prompt)
@@ -275,7 +233,6 @@ def generate_without_explored_paths(question, args, question_type):
         response = run_mixtral(prompt)
     elif args.LLM_type == "mistral":
         response = run_mistral(prompt)
-    # print("!! LLM Answer\n", response)
     return prompt_template, response
 
 def if_finish_list(lst):
