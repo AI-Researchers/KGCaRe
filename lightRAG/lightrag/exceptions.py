@@ -73,7 +73,7 @@ class StorageNotInitializedError(RuntimeError):
             f"  rag = LightRAG(...)\n"
             f"  await rag.initialize_storages()  # Required - auto-initializes pipeline_status\n"
             f"\n"
-            f"See: https://github.com/HKUDS/LightRAG#important-initialization-requirements"
+            f"Call initialize_storages() before running storage operations."
         )
 
 

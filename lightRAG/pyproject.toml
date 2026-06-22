@@ -3,11 +3,8 @@ requires = ["setuptools>=64", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "lightrag-hku"
+name = "lightrag-local"
 dynamic = ["version"]
-authors = [
-    {name = "Zirui Guo"}
-]
 description = "LightRAG: Simple and Fast Retrieval-Augmented Generation"
 readme = "README.md"
 license = {text = "MIT"}
@@ -130,11 +127,11 @@ offline-llm = [
 
 offline = [
     # Complete offline package (includes api for document processing, plus storage and LLM)
-    "lightrag-hku[api,offline-storage,offline-llm]",
+    "lightrag-local[api,offline-storage,offline-llm]",
 ]
 
 test = [
-    "lightrag-hku[api]",
+    "lightrag-local[api]",
     "pytest>=8.4.2",
     "pytest-asyncio>=1.2.0",
     "pre-commit",
@@ -142,7 +139,7 @@ test = [
 ]
 
 evaluation = [
-    "lightrag-hku[api]",
+    "lightrag-local[api]",
     "ragas>=0.3.7",
     "datasets>=4.3.0",
 ]
@@ -158,12 +155,6 @@ lightrag-gunicorn = "lightrag.api.run_with_gunicorn:main"
 lightrag-hash-password = "lightrag.tools.hash_password:main"
 lightrag-download-cache = "lightrag.tools.download_cache:main"
 lightrag-clean-llmqc = "lightrag.tools.clean_llm_query_cache:main"
-
-[project.urls]
-Homepage = "https://github.com/HKUDS/LightRAG"
-Documentation = "https://github.com/HKUDS/LightRAG"
-Repository = "https://github.com/HKUDS/LightRAG"
-"Bug Tracker" = "https://github.com/HKUDS/LightRAG/issues"
 
 [tool.setuptools.packages.find]
 include = ["lightrag*"]

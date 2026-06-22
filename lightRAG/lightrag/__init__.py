@@ -16,7 +16,3 @@ def __getattr__(name: str) -> Any:
         globals()[name] = value
         return value
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
-
-
-__author__ = "Zirui Guo"
-__url__ = "https://github.com/HKUDS/LightRAG"

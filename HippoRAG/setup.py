@@ -6,12 +6,9 @@ with open("README.md", "r") as f:
 setuptools.setup(
     name="hipporag",
     version="2.0.0-alpha.4",
-    author="Bernal Jimenez Gutierrez",
-    author_email="jimenezgutierrez.1@osu.edu",
-    description="A powerful graph-based RAG framework that enables LLMs to identify and leverage connections within new knowledge for improved retrieval.",
+    description="Graph-based RAG package used by the local adapter scripts.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/OSU-NLP-Group/HippoRAG",
     package_dir={"": "src"},
     packages=setuptools.find_packages("src"),
     python_requires=">=3.10",
