@@ -17,6 +17,13 @@ docs/                  Method notes and artifact documentation
 scripts/               Publishing and cleanup utilities
 ```
 
+Detailed method-specific instructions are available in:
+
+- `KGCaRe/README.md`
+- `HybridRAG/README.md`
+- `lightRAG/adapters/README.md`
+- `HippoRAG/adapters/README.md`
+
 ## Main Models Used
 
 The artifact defaults are aligned with the paper experiments:
