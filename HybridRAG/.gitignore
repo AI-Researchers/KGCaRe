@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+adapter_data/
+adapter_runs/
+indexes/
