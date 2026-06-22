@@ -56,7 +56,7 @@ export OPENAI_API_KEY=your_key_here
 # ConditionalQA smoke test with GPT-4.1-nano + OpenAI embeddings
 python adapters/run_conditionalqa_vllm.py \
 	--provider openai \
-	--llm-model gpt-4.1-nano \
+	--llm-model gpt-3.5-turbo-0125 \
 	--embedding-model text-embedding-3-small \
 	--ingest \
 	--limit 1
@@ -64,7 +64,7 @@ python adapters/run_conditionalqa_vllm.py \
 # HotpotQA smoke test
 python adapters/run_hotpotqa_vllm.py \
 	--provider openai \
-	--llm-model gpt-4.1-nano \
+	--llm-model gpt-3.5-turbo-0125 \
 	--embedding-model text-embedding-3-small \
 	--ingest \
 	--limit 1

@@ -57,8 +57,8 @@ def default_dataset_paths(dataset: DatasetName) -> DatasetPaths:
 class IndexConfig(BaseModel):
     dataset: DatasetName
     index_name: str
-    kg_model: str = "gpt-4.1-mini"
-    qa_model: str = "gpt-4.1-nano"
+    kg_model: str = "gpt-4o-2024-08-06"
+    qa_model: str = "gpt-3.5-turbo-0125"
     embedding_model: str = "text-embedding-3-small"
     embedding_dimension: int = 1536
     index_dir: Path
@@ -72,8 +72,8 @@ class IndexConfig(BaseModel):
         cls,
         dataset: DatasetName,
         index_name: str,
-        kg_model: str = "gpt-4.1-mini",
-        qa_model: str = "gpt-4.1-nano",
+        kg_model: str = "gpt-4o-2024-08-06",
+        qa_model: str = "gpt-3.5-turbo-0125",
         embedding_model: str = "text-embedding-3-small",
         index_root: Path | None = None,
         docs_path: Path | None = None,

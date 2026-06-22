@@ -7,9 +7,9 @@ cd "${WORKSPACE_ROOT}"
 
 PYTHON_BIN="${PYTHON_BIN:-python}"
 RUN_NAME="${RUN_NAME:-full}"
-KG_MODEL="${KG_MODEL:-gpt-4.1-mini}"
+KG_MODEL="${KG_MODEL:-gpt-4o-2024-08-06}"
 EMBEDDING_MODEL="${EMBEDDING_MODEL:-text-embedding-3-small}"
-INDEX_DIR="${INDEX_DIR:-HybridRAG/indexes/conditionalqa/dev-gpt-4-1-mini-shared}"
+INDEX_DIR="${INDEX_DIR:-HybridRAG/indexes/conditionalqa/dev-gpt-4o-2024-08-06-shared}"
 
 "${PYTHON_BIN}" HybridRAG/prepare_conditionalqa.py
 
@@ -47,8 +47,8 @@ run_and_eval() {
     --input "HybridRAG/adapter_runs/conditionalqa/${provider_slug}/${model_slug}/${RUN_NAME}/predictions.jsonl"
 }
 
-run_and_eval "openai" "gpt-4.1-nano" ""
-run_and_eval "openai" "gpt-4.1-mini" ""
+run_and_eval "openai" "gpt-3.5-turbo-0125" ""
+run_and_eval "openai" "gpt-4o-2024-08-06" ""
 
 MISTRAL_BASE_URL="${MISTRAL_BASE_URL:-${VLLM_BASE_URL:-http://127.0.0.1:8050/v1}}"
 MIXTRAL_BASE_URL="${MIXTRAL_BASE_URL:-${VLLM_BASE_URL:-http://127.0.0.1:8051/v1}}"

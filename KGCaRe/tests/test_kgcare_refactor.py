@@ -57,7 +57,7 @@ def test_config_defaults_and_slugified_run_dir() -> None:
     assert config.embedding_dimension == 1536
     assert config.index_dir == Path(__file__).resolve().parents[1] / "indexes" / "conditionalqa" / "dev-openai"
     assert slugify("mistralai/Mixtral-8x7B-Instruct-v0.1") == "mistralai-mixtral-8x7b-instruct-v0.1"
-    assert config.run_dir("gpt-4.1-nano", "full").name == "full"
+    assert config.run_dir("gpt-3.5-turbo-0125", "full").name == "full"
     hotpot_config = IndexConfig.create(dataset="hotpotqa", index_name="dev-openai")
     assert hotpot_config.dataset_paths.kg_docs_path == REPO_ROOT / "data" / "wiki_articles_supported_500"
     assert hotpot_config.dataset_paths.vector_docs_path == REPO_ROOT / "data" / "wiki_articles_supported_500"

@@ -22,7 +22,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--index-dir", type=Path, default=None)
     parser.add_argument("--output-path", type=Path, default=None)
     parser.add_argument("--provider", choices=["openai", "openai-compatible", "vllm"], default="openai")
-    parser.add_argument("--llm-model", type=str, default="gpt-4.1-mini")
+    parser.add_argument("--llm-model", type=str, default="gpt-4o-2024-08-06")
     parser.add_argument("--llm-base-url", type=str, default=None)
     parser.add_argument("--llm-api-key", type=str, default=None)
     parser.add_argument("--embedding-model", type=str, default=os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"))

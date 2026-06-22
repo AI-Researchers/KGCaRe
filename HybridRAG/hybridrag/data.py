@@ -60,7 +60,7 @@ def run_dir(dataset_name: str, provider: str, model_name: str, run_name: str) ->
     )
 
 
-def default_index_dir(index_name: str = "dev-gpt-4-1-mini-shared", dataset_name: str = "ConditionalQA") -> Path:
+def default_index_dir(index_name: str = "dev-gpt-4o-2024-08-06-shared", dataset_name: str = "ConditionalQA") -> Path:
     return ensure_dir(DEFAULT_INDEX_ROOT / slugify(dataset_name) / index_name)
 
 

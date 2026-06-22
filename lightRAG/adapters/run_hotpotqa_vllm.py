@@ -30,7 +30,7 @@ DEFAULT_BASE_URL = os.getenv("LLM_BINDING_HOST", "http://127.0.0.1:8000/v1")
 DEFAULT_EMBED_MODEL = os.getenv("EMBEDDING_MODEL", "BAAI/bge-large-en-v1.5")
 DEFAULT_EMBED_BASE_URL = os.getenv("EMBEDDING_BINDING_HOST", "http://127.0.0.1:8001/v1")
 DEFAULT_API_KEY = os.getenv("LLM_BINDING_API_KEY", "not_needed")
-DEFAULT_OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4.1-nano")
+DEFAULT_OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo-0125")
 DEFAULT_OPENAI_EMBED_MODEL = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
 DEFAULT_OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
 

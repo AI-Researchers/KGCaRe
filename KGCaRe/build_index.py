@@ -14,7 +14,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build a self-contained KGCaRe index.")
     parser.add_argument("--dataset", choices=["conditionalqa", "hotpotqa"], required=True)
     parser.add_argument("--index-name", required=True)
-    parser.add_argument("--kg-model", default="gpt-4.1-mini")
+    parser.add_argument("--kg-model", default="gpt-4o-2024-08-06")
     parser.add_argument("--kg-base-url", default=os.getenv("OPENAI_BASE_URL"))
     parser.add_argument("--kg-api-key", default=os.getenv("OPENAI_API_KEY"))
     parser.add_argument("--kg-output-mode", choices=["structured", "text"], default="structured")

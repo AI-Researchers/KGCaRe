@@ -20,9 +20,9 @@ python adapters/hotpotqa_adapter.py
 OpenAI models:
 
 ```bash
-python adapters/run_conditionalqa_openai.py --llm-model gpt-4.1-nano --limit 20 --run-name smoke
+python adapters/run_conditionalqa_openai.py --llm-model gpt-3.5-turbo-0125 --limit 20 --run-name smoke
 
-python adapters/run_hotpotqa_openai.py --llm-model gpt-4.1-nano --limit 20 --run-name smoke
+python adapters/run_hotpotqa_openai.py --llm-model gpt-3.5-turbo-0125 --limit 20 --run-name smoke
 ```
 
 vLLM models on one OpenAI-compatible endpoint:

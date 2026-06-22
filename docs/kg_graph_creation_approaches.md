@@ -27,12 +27,12 @@ subject-predicate-object schema.
 
 | Dataset | Approach | Full graph model | Nodes | Edges | Triples / relations |
 |---|---|---|---:|---:|---:|
-| ConditionalQA | HybridRAG | `gpt-4.1-mini` | 5,139 | 3,750 | 3,750 |
-| ConditionalQA | LightRAG | `gpt-4.1-mini` | 2,328 | 2,530 | 2,530 |
+| ConditionalQA | HybridRAG | `gpt-4o-2024-08-06` | 5,139 | 3,750 | 3,750 |
+| ConditionalQA | LightRAG | `gpt-4o-2024-08-06` | 2,328 | 2,530 | 2,530 |
 | ConditionalQA | LightRAG | `mistralai/Mistral-7B-Instruct-v0.3` | 1,876 | 1,461 | 1,461 |
 | ConditionalQA | LightRAG | `mistralai/Mixtral-8x7B-Instruct-v0.1` | 1,069 | 666 | 666 |
-| ConditionalQA | HippoRAG | `gpt-4.1-mini` | 1,754 | 5,336 | 1,528 |
-| ConditionalQA | HippoRAG | `gpt-4.1-nano` | 1,731 | 5,014 | 1,434 |
+| ConditionalQA | HippoRAG | `gpt-4o-2024-08-06` | 1,754 | 5,336 | 1,528 |
+| ConditionalQA | HippoRAG | `gpt-3.5-turbo-0125` | 1,731 | 5,014 | 1,434 |
 | ConditionalQA | HippoRAG | `mistralai/Mistral-7B-Instruct-v0.3` | 2,696 | 8,716 | 2,640 |
 | ConditionalQA | HippoRAG | `mistralai/Mixtral-8x7B-Instruct-v0.1` | 2,337 | 7,726 | 2,310 |
 | HotPotQA | HybridRAG | `Qwen/Qwen3.6-35B-A3B` served as `qwen-kg` | 9,870 | 10,649 | 10,649 |
@@ -41,9 +41,9 @@ subject-predicate-object schema.
 
 Artifacts used for these counts:
 
-- HybridRAG ConditionalQA: `HybridRAG/indexes/conditionalqa/dev-gpt-4-1-mini-shared/`
+- HybridRAG ConditionalQA: `HybridRAG/indexes/conditionalqa/dev-gpt-4o-2024-08-06-shared/`
 - HybridRAG HotPotQA: `HybridRAG/indexes/hotpotqa/stratified-qwen-shared/`
-- LightRAG ConditionalQA: `lightRAG/workspaces/conditionalqa-gpt41mini/`, `lightRAG/workspaces/conditionalqa-mistral7b-isolated/`, `lightRAG/workspaces/conditionalqa-mixtral8x7b-isolated/`
+- LightRAG ConditionalQA: `lightRAG/workspaces/conditionalqa-gpt4o20240806/`, `lightRAG/workspaces/conditionalqa-mistral7b-isolated/`, `lightRAG/workspaces/conditionalqa-mixtral8x7b-isolated/`
 - LightRAG HotPotQA: `lightRAG/adapter_runs/hotpotqa/index-qwen36-27b/`
 - HippoRAG ConditionalQA: full and `full-fixed` runs under `HippoRAG/adapter_runs/conditionalqa/`
 - HippoRAG HotPotQA: `HippoRAG/adapter_runs/hotpotqa/index-qwen36-27b/`
@@ -136,7 +136,7 @@ flowchart TD
 ### Exact Examples From Our Runs
 
 ConditionalQA examples from
-`HybridRAG/indexes/conditionalqa/dev-gpt-4-1-mini-shared/triples.jsonl`:
+`HybridRAG/indexes/conditionalqa/dev-gpt-4o-2024-08-06-shared/triples.jsonl`:
 
 | Head | Head type | Relation | Tail | Tail type | Evidence |
 |---|---|---|---|---|---|
@@ -270,7 +270,7 @@ flowchart TD
 ### Exact Examples From Our Runs
 
 ConditionalQA examples from
-`HippoRAG/adapter_runs/conditionalqa/openai/gpt-4-1-mini/full/openie_results_ner_gpt-4.1-mini.json`:
+`HippoRAG/adapter_runs/conditionalqa/openai/gpt-4o-2024-08-06/full/openie_results_ner_gpt-4o-2024-08-06.json`:
 
 Extracted entities:
 
@@ -435,7 +435,7 @@ flowchart TD
 ### Exact Examples From Our Runs
 
 ConditionalQA examples from
-`lightRAG/workspaces/conditionalqa-gpt41mini/vdb_relationships.json`:
+`lightRAG/workspaces/conditionalqa-gpt4o20240806/vdb_relationships.json`:
 
 | Source entity | Target entity | Relationship content |
 |---|---|---|

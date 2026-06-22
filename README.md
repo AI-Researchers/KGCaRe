@@ -1,510 +1,130 @@
-# README: ConditionalQA - Retrieval-Augmented QA Pipelines
+# KGCaRe Paper Artifact
 
-This repository provides two distinct RAG pipelines:
+This repository contains the code artifact for **KGCaRe**, a knowledge-graph-augmented retrieval and question answering pipeline for complex conditional QA. The main implementation is in `KGCaRe/`. Baseline adapters retained for comparison are in `HybridRAG/`, `lightRAG/adapters/`, and `HippoRAG/adapters/`.
 
-* `HybridContextQA`: Combines vector-based and KG-table-based retrieval.
-* `KGCaRe`: Incorporates advanced multi-hop KG reasoning with traversal-based KG retrieval.
+KGCaRe builds a document-level knowledge graph with LLM-extracted triples, stores the triples in Neo4j, stores normalized text embeddings in FAISS, retrieves graph and vector context separately, and passes the combined context to the answer-generation prompt. The vector channel is a supporting retrieval path: it preserves source-text wording and exact span conditions that may not survive triple extraction.
 
-Each is tested on the **ConditionalQA** dataset.
+## Repository Layout
 
----
-
-## 1. Dataset: ConditionalQA : ( https://haitian-sun.github.io/conditionalqa/ )
-
-**Paper**: [https://arxiv.org/abs/2110.06884](https://arxiv.org/abs/2110.06884)
-
-**Dataset GitHub**: [https://github.com/haitian-sun/ConditionalQA](https://github.com/haitian-sun/ConditionalQA)
-
-**Dataset TRAIN**: [https://github.com/haitian-sun/ConditionalQA/blob/master/v1_0/train.json](https://github.com/haitian-sun/ConditionalQA/blob/master/v1_0/train.json)
-
-**Dataset DEV**: [https://github.com/haitian-sun/ConditionalQA/blob/master/v1_0/dev.json](https://github.com/haitian-sun/ConditionalQA/blob/master/v1_0/dev.json)
-
-**Dataset DOCUMENTS**: [https://github.com/haitian-sun/ConditionalQA/blob/master/v1_0/documents.json](https://github.com/haitian-sun/ConditionalQA/blob/master/v1_0/documents.json)
-
-### Structure
-
-* **dev.json** / **train.json** contain fields:
-
-```json
-{
-    "url": "https://www.gov.uk/housing-benefit",
-    "scenario": "I'm 71, and am currently living in rented accommodation with my 64-year-old Civil Partner. I have an existing Housing Benefit claim.",
-    "question": "Can I continue to claim Housing Benefit?",
-    "not_answerable": false,
-    "answers": [
-      [
-        "yes",
-        []
-      ]
-    ],
-    "evidences": [
-      "<p>Your existing claim will not be affected if, before 15 May 2019, you:</p>",
-      "<li>were getting Housing Benefit</li>",
-      "<li>had reached State Pension age</li>",
-      "<p>It does not matter if your partner is under State Pension age.</p>"
-    ],
-    "id": "dev-13"
-  }
+```text
+KGCaRe/                Main KGCaRe implementation
+HybridRAG/             HybridRAG baseline adapter
+lightRAG/adapters/     LightRAG dataset adapters and evaluation bridges
+HippoRAG/adapters/     HippoRAG dataset adapters and evaluation bridges
+core_utils/            Shared legacy utilities and evaluation helpers
+data/                  ConditionalQA and sampled HotpotQA data used by the artifact
+docs/                  Method notes and artifact documentation
+scripts/               Publishing and cleanup utilities
 ```
 
-### Document Preparation
+## Main Models Used
 
-The documents (used for retrieval) are saved as HTML-like pages with semantic structures extracted from ConditionalQA guidance. These are stored under:
+The artifact defaults are aligned with the paper experiments:
+
+- KG construction model: `gpt-4o-2024-08-06`
+- OpenAI QA baseline model: `gpt-3.5-turbo-0125`
+- Embedding model: `text-embedding-3-small`
+
+Local vLLM/OpenAI-compatible models can be used by passing `--qa-base-url`, `--kg-base-url`, and `--*-api-key not_needed`.
+
+## Setup
+
+Use Python 3.10+ and install the main KGCaRe dependencies:
 
 ```bash
-./data/docs_dev/  
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r KGCaRe/requirements.txt
 ```
 
-To convert from original JSON documents:
-
-```python
-import json
-
-# Load the JSON data
-with open("documents.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
-
-for doc in data:
-    title = doc["title"]
-    url = doc["url"]
-    content = "\n".join(doc["contents"])
-
-    output = f"{title}\n{url}\n{content}"
-
-    # Save to .txt file (sanitize title for filename)
-    filename = title.replace(" ", "_").replace("/", "_") + ".txt"
-    with open(filename, "w", encoding="utf-8") as out_file:
-        out_file.write(output)
-
-    print(f"Saved: {filename}")
-
-```
-
----
-
-## 2. Setup and Installation
-
-### 2.1 Python Environment
-
-```bash
-conda create -n llm-project python=3.10 -y
-conda activate llm-project
-pip install -r requirements.txt
-```
-
-### 2.2 Neo4j Graph Database
-
-Used for storing and traversing the Knowledge Graph.
-
-#### Installation:
-
-```bash
-# Download from https://neo4j.com/download/
-# Or install via apt (Ubuntu):
-wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo apt-key add -
-echo 'deb https://debian.neo4j.com stable 5' | sudo tee /etc/apt/sources.list.d/neo4j.list
-sudo apt update && sudo apt install neo4j
-```
-
-#### Configuration:
-
-* Set password in: `neo4j.conf`
-* Start the server:
-
-```bash
-sudo systemctl enable neo4j
-sudo systemctl start neo4j
-```
-
-* Configure authentication:
-
-```bash
-export NEO4J_URI=bolt://localhost:7687
-export NEO4J_USERNAME=neo4j
-export NEO4J_PASSWORD=your_password_here
-```
-
----
-
-## 3. LLM + Embedding Settings
-
-You can use:
-
-* **OpenAI** (`gpt-4`, `gpt-3.5-turbo`)
-* **Mistral** via **vLLM** or **OpenAI-compatible API**
-* **Huggingface** models (like `llama3`) via `ollama`
-
-### API Keys
-
-Set as environment variables:
+Configure API and Neo4j credentials:
 
 ```bash
 export OPENAI_API_KEY=...
-export CO_API_KEY=...
-```
-
-### Embedding
-
-Default: `BAAI/bge-large-en-v1.5` via Huggingface.
-
-### Reranker Options
-
-* `cohere` (default): Uses Cohere ReRank API
-* `llm`: LLM-based reranking using the loaded model
-* `none`: No reranking
-
----
-
-## 4. Pipeline Options
-
-### 4.1 HybridContextQA
-
-Combines:
-
-* **KGTableRetriever** with embedding
-* **VectorIndexRetriever**
-* Optional reranking
-
-**Path**: `HybridContextQA/conditionalqa/run.py`
-
-Run:
-
-```bash
-python HybridContextQA/conditionalqa_run.py \
-  --llm_framework openai \
-  --llm_model gpt-4o \
-  --index hybrid_index \
-  --reranker cohere \
-  --num_shots 4
-```
-
-### 4.2 KGCaRe
-
-Uses:
-
-* **KGRetrieverToGTraversal\_final**: Neo4j multi-hop KG traversal
-* **VectorIndexRetriever**
-* Supports `multi_prompt=True` for KGIndex construction
-
-**Path**: `KGCaRe/conditionalqa/run.py`
-
-Run:
-
-```bash
-python KGCaRe/conditionalqa_run.py \
-  --llm_framework openai \
-  --llm_model gpt-4o \
-  --index hybrid_index \
-  --reranker llm \
-  --num_shots 4
-```
-
----
-
-## 5. Output Format
-
-Each run creates:
-
-```bash
-outputs_final/dev_kg_v3/ConditionalQA_test/
-  └── <llm_model>/<index>/shots_<n>/run_<m>/
-      ├── output.jsonl           # model predictions
-      ├── skipped_ids.json       # failed attempts
-      └── results.json           # final aggregated scores
-```
-
-### Sample Output Entry
-
-```json
-{
-  "id": "001",
-  "Prompt": "...",
-  "Question": "My brother and his wife are in prison for carrying out a large fraud scheme. Their 7 and 8 year old children have been living with me for the last 4 years. I want to become their Special Guardian to look after them permanently How long will it be before I hear back from the court?",
-  "Question_Type": "span",
-  "answers": [
-            [
-                "Within 10 days of receiving your application",
-                []
-            ]
-        ],
-  "Actual_Answer": [
-            [
-                "within 10 days",
-                []
-            ]
-        ],
-  "Score": {
-            "EM": 0.866013071895425,
-            "Conditional_EM": 0.866013071895425,
-            "F1": 0.7445266842842102,
-            "Conditional_F1": 0.7445266842842102
-        }
-}
-```
-
----
-
-## 6. Notes
-
-* Evaluation supports both EM/F1 and METEOR/BERTScore.
-* Can resume failed runs using `--retry_skipped`
-* Easy to switch between retrievers via `--index` flag:
-
-  * `kg_index`, `vector_index`, `hybrid_index`, `no_index`
-
----
-
-
-# README: HotpotQA - HybridContextQA and KGCaRe Pipelines
-
-This README provides complete setup and usage instructions for running **HybridContextQA** and **KGCaRe** pipelines on the **HotpotQA** dataset.
-
----
-
-## 📘 1. Dataset: HotpotQA
-
-**Paper**: [https://arxiv.org/pdf/1809.09600.pdf](https://arxiv.org/pdf/1809.09600.pdf)
-**Dataset Link**: [https://hotpotqa.github.io/](https://hotpotqa.github.io/)
-
-### ✅ Format
-
-HotpotQA provides multi-hop QA with supporting context paragraphs.
-
-For this pipeline, we only use the **stratified_hotpotqa_500sample_with_tag.json** file:
-
-```json
-{
-  "_id": "5a8b57f25542995d1e6f1371",
-  "question": "Was Meghan Markle born in the same year as Teresa Palmer?",
-  "answer": "No",
-  "type": "comparison",
-  "level": "medium",
-  "supporting_facts": [...],
-  "context": [...]
-}
-```
-
-We format and save these into:
-
-```bash
-./data/hotpotqa/dev.json
-```
-
----
-
-## 🗂️ 2. Folder Structure
-
-```
-project_root/
-|
-├── core_utils/                   # Shared scripts (retrieval, QA, utils)
-│   ├── retrieve_context.py
-│   ├── run_qa_from_context.py
-│   └── ...
-│
-├── HybridContextQA/
-│   └── hotpotqa/
-│       ├── run.py
-│       └── run_hybrid_hotpotqa.sh
-│
-├── KGCaRe/
-│   └── hotpotqa/
-│       ├── run.py
-│       └── run_kg_hotpotqa.sh
-│
-├── data/
-│   └── hotpotqa/
-│       ├── dev.json               # Formatted questions
-│       └── docs_dev/             # Parsed document .txt files
-│           ├── 0001.txt
-│           └── ...
-│
-├── storage/
-│   ├── hotpot_vector_index/      # FAISS vector store
-│   └── hotpot_kg_index/          # Neo4j KG index
-│
-├── outputs_final/
-│   └── hotpotqa/
-│       ├── hybrid_dev.jsonl
-│       ├── hybrid_answers.jsonl
-│       ├── kg_dev.jsonl
-│       └── kg_answers.jsonl
-│
-├── requirements.txt
-└── README.md
-```
-
----
-
-## ⚙️ 3. Setup Instructions
-
-### 3.1 Python Environment
-
-```bash
-conda create -n llm-project python=3.10 -y
-conda activate llm-project
-pip install -r requirements.txt
-```
-
-### 3.2 Neo4j Setup
-
-Used to store and traverse KG triples.
-
-```bash
-# Install (Ubuntu)
-wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo apt-key add -
-echo 'deb https://debian.neo4j.com stable 5' | sudo tee /etc/apt/sources.list.d/neo4j.list
-sudo apt update && sudo apt install neo4j
-```
-
-#### Configure and Start
-
-```bash
-sudo systemctl enable neo4j
-sudo systemctl start neo4j
-
 export NEO4J_URI=bolt://localhost:7687
 export NEO4J_USERNAME=neo4j
-export NEO4J_PASSWORD=your_password_here
+export NEO4J_PASSWORD=...
+export NEO4J_DATABASE=neo4j
 ```
 
-### 3.3 API Keys
+A local Neo4j 5 server is required for KG storage and traversal.
+
+## Build A KGCaRe Index
+
+ConditionalQA:
 
 ```bash
-export OPENAI_API_KEY=...
-export CO_API_KEY=...
+python KGCaRe/build_index.py \
+  --dataset conditionalqa \
+  --index-name conditionalqa-gpt4o \
+  --kg-model gpt-4o-2024-08-06 \
+  --embedding-model text-embedding-3-small \
+  --reset-graph \
+  --overwrite-vectors \
+  --overwrite-triples
 ```
 
----
-
-## 🧠 4. LLM, Embeddings & Reranker
-
-### Supported LLM Frameworks
-
-* `openai`        → `gpt-4o`, `gpt-3.5-turbo`
-* `openai_like`   → Mistral etc. via vLLM / Ollama
-
-### Embedding Model
-
-* `BAAI/bge-large-en-v1.5` via HuggingFace
-
-### Reranker Options
-
-* `cohere`: Uses Cohere's ReRank API
-* `llm`: Reranking with the main LLM
-* `none`: No reranking
-
----
-
-## 🚀 5. Run Pipelines
-
-### 🔹 HybridContextQA
-
-**Script**: `HybridContextQA/hotpotqa/run_hybrid_hotpotqa.sh`
+HotpotQA sample:
 
 ```bash
-chmod +x HybridContextQA/hotpotqa/run_hybrid_hotpotqa.sh
-./HybridContextQA/hotpotqa/run_hybrid_hotpotqa.sh
+python KGCaRe/build_index.py \
+  --dataset hotpotqa \
+  --index-name hotpotqa-gpt4o \
+  --kg-model gpt-4o-2024-08-06 \
+  --embedding-model text-embedding-3-small \
+  --reset-graph \
+  --overwrite-vectors \
+  --overwrite-triples
 ```
 
-Contents of script:
+Indexes are written under `KGCaRe/indexes/`. Generated indexes are ignored by Git.
+
+## Run KGCaRe QA
+
+Hybrid KG + vector retrieval:
 
 ```bash
-#!/bin/bash
-
-# Step 1: Retrieve vector + KG context
-python ../../core_utils/retrieve_context.py \
-  --input ../../data/hotpotqa/dev.json \
-  --output ../../outputs_final/hotpotqa/hybrid_dev.jsonl \
-  --framework openai \
-  --model gpt-4o \
-  --vector-storage ../../storage/hotpot_vector_index \
-  --kg-storage ../../storage/hotpot_kg_index \
-  --similarity-top-k 3 \
-  --kg-top-k 30
-
-# Step 2: Answer from context
-python ../../core_utils/run_qa_from_context.py \
-  --input ../../outputs_final/hotpotqa/hybrid_dev.jsonl \
-  --output ../../outputs_final/hotpotqa/hybrid_answers.jsonl \
-  --gold_data ../../data/hotpotqa/dev.json \
-  --framework openai \
-  --model gpt-4o \
-  --context hybrid
+python KGCaRe/run_qa.py \
+  --dataset conditionalqa \
+  --index-name conditionalqa-gpt4o \
+  --mode hybrid \
+  --qa-model gpt-3.5-turbo-0125 \
+  --run-name full \
+  --traversal-output-mode structured \
+  --structured-method json_schema
 ```
 
----
+KG-only or vector-only ablations can be run with `--mode kg` or `--mode vector`.
 
-### 🔹 KGCaRe
-
-**Script**: `KGCaRe/hotpotqa/run_kg_hotpotqa.sh`
+Evaluate ConditionalQA:
 
 ```bash
-chmod +x KGCaRe/hotpotqa/run_kg_hotpotqa.sh
-./KGCaRe/hotpotqa/run_kg_hotpotqa.sh
+python KGCaRe/eval_conditionalqa.py \
+  --run-dir KGCaRe/adapter_runs/conditionalqa/openai/gpt-3.5-turbo-0125/full
 ```
 
-Contents of script:
+Evaluate HotpotQA:
 
 ```bash
-#!/bin/bash
-
-# Step 1: KG traversal-based retrieval
-python ../../core_utils/retrieve_context.py \
-  --input ../../data/hotpotqa/dev.json \
-  --output ../../outputs_final/hotpotqa/kg_dev.jsonl \
-  --framework openai \
-  --model gpt-4o \
-  --vector-storage ../../storage/hotpot_vector_index \
-  --kg-storage ../../storage/hotpot_kg_index \
-  --similarity-top-k 0 \
-  --kg-top-k 30
-
-# Step 2: Answer from context
-python ../../core_utils/run_qa_from_context.py \
-  --input ../../outputs_final/hotpotqa/kg_dev.jsonl \
-  --output ../../outputs_final/hotpotqa/kg_answers.jsonl \
-  --gold_data ../../data/hotpotqa/dev.json \
-  --framework openai \
-  --model gpt-4o \
-  --context kg
+python KGCaRe/eval_hotpotqa.py \
+  --run-dir KGCaRe/adapter_runs/hotpotqa/openai/gpt-3.5-turbo-0125/full
 ```
 
----
+Run outputs are written under `KGCaRe/adapter_runs/` and are ignored by Git.
 
-## 📥 6. Output Format
+## Baseline Adapters
 
-Each pipeline saves predictions to `output.jsonl`:
+The retained baselines are included for reproducibility and comparison:
 
-```json
-{
-  "id": "5a8b57f25542995d1e6f1371",
-  "Question": "Was Meghan Markle born in the same year as Teresa Palmer?",
-  "answers": "No",
-  "Actual_Answer": "No",
-  "Score": {
-    "EM": 1.0,
-    "F1": 1.0,
-    "BERT_F1": 1.0
-  }
-}
-```
+- `HybridRAG/`: vector + graph-triple retrieval baseline.
+- `lightRAG/adapters/`: dataset adapters and evaluation bridges for LightRAG.
+- `HippoRAG/adapters/`: dataset adapters and evaluation bridges for HippoRAG.
 
-If a query fails, its ID is logged in `skipped_ids.json`.
+Each baseline directory has its own README or adapter scripts. Install baseline-specific dependencies separately when running those experiments.
 
----
+## Artifact Notes
 
-## 📎 7. Notes
-
-* Works with any OpenAI-compatible LLM or local models via vLLM/Ollama
-* You can vary `--context` flag in `run_qa_from_context.py` to use:
-
-  * `vector`
-  * `kg`
-  * `hybrid`
-  * `none`
-* Retry failed questions using `--retry_skipped`
-* Evaluation metrics: EM, F1, BERTScore (optionally METEOR)
-
----
-
+- The repository intentionally excludes generated indexes, run outputs, local workspaces, caches, virtual environments, and private credentials.
+- Neo4j credentials are read from environment variables; no local passwords are stored in the artifact.
+- The FAISS vector store uses normalized embeddings with exact inner-product search through `faiss.IndexFlatIP`.
+- See `docs/kg_graph_creation_approaches.md` for notes comparing the KG construction behavior of KGCaRe and the retained baselines.

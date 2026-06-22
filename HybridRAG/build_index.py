@@ -14,7 +14,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--corpus-path", type=Path, default=None)
     parser.add_argument("--docs-dir", type=Path, default=DATA_ROOT / "docs_dev")
     parser.add_argument("--index-dir", type=Path, default=None)
-    parser.add_argument("--kg-model", type=str, default="gpt-4.1-mini")
+    parser.add_argument("--kg-model", type=str, default="gpt-4o-2024-08-06")
     parser.add_argument("--kg-base-url", type=str, default=os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1"))
     parser.add_argument("--kg-api-key", type=str, default=os.getenv("OPENAI_API_KEY", ""))
     parser.add_argument("--embedding-model", type=str, default=os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"))

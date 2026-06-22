@@ -10,8 +10,8 @@ The initial experiment uses:
 
 - Dataset: `data/docs_dev/*.txt` and `data/dev.json`
 - Embeddings: `OpenAIEmbeddings(model="text-embedding-3-small")`
-- Shared KG extractor: `gpt-4.1-mini`
-- QA models: `gpt-4.1-nano`, `gpt-4.1-mini`,
+- Shared KG extractor: `gpt-4o-2024-08-06`
+- QA models: `gpt-3.5-turbo-0125`, `gpt-4o-2024-08-06`,
   `mistralai/Mistral-7B-Instruct-v0.3`, and
   `mistralai/Mixtral-8x7B-Instruct-v0.1`
 - Evaluation: existing `core_utils.conditionalqa_eval`
@@ -54,7 +54,7 @@ Build the shared index:
 
 ```bash
 python HybridRAG/build_index.py \
-  --kg-model gpt-4.1-mini \
+  --kg-model gpt-4o-2024-08-06 \
   --embedding-model text-embedding-3-small
 ```
 
@@ -63,7 +63,7 @@ Run one QA model:
 ```bash
 python HybridRAG/run_hybrid.py \
   --provider openai \
-  --llm-model gpt-4.1-mini \
+  --llm-model gpt-4o-2024-08-06 \
   --run-name full
 ```
 
@@ -71,7 +71,7 @@ Evaluate one run:
 
 ```bash
 python HybridRAG/eval_conditionalqa.py \
-  --input HybridRAG/adapter_runs/conditionalqa/openai/gpt-4-1-mini/full/predictions.jsonl
+  --input HybridRAG/adapter_runs/conditionalqa/openai/gpt-4o-2024-08-06/full/predictions.jsonl
 ```
 
 Run the full model matrix:
@@ -112,7 +112,7 @@ Run QA with the shared index:
 ```bash
 python HybridRAG/run_hotpotqa.py \
   --provider openai \
-  --llm-model gpt-4.1-mini \
+  --llm-model gpt-4o-2024-08-06 \
   --run-name full
 ```
 
@@ -120,5 +120,5 @@ Evaluate:
 
 ```bash
 python HybridRAG/eval_hotpotqa.py \
-  --input HybridRAG/adapter_runs/hotpotqa/openai/gpt-4-1-mini/full/predictions.jsonl
+  --input HybridRAG/adapter_runs/hotpotqa/openai/gpt-4o-2024-08-06/full/predictions.jsonl
 ```

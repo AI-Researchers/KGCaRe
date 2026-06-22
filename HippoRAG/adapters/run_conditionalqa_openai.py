@@ -11,7 +11,7 @@ from run_utils import load_corpus_docs, load_query_rows, run_hipporag
 
 def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run HippoRAG on ConditionalQA with OpenAI models.")
-    parser.add_argument("--llm-model", type=str, default="gpt-4.1-nano")
+    parser.add_argument("--llm-model", type=str, default="gpt-3.5-turbo-0125")
     parser.add_argument("--llm-base-url", type=str, default=os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1"))
     parser.add_argument("--embedding-model", type=str, default=os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"))
     parser.add_argument("--embedding-base-url", type=str, default=os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1"))

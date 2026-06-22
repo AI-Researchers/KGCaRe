@@ -23,7 +23,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run QA over a KGCaRe index.")
     parser.add_argument("--dataset", choices=["conditionalqa", "hotpotqa"], required=True)
     parser.add_argument("--index-name", required=True)
-    parser.add_argument("--qa-model", default="gpt-4.1-nano")
+    parser.add_argument("--qa-model", default="gpt-3.5-turbo-0125")
     parser.add_argument("--qa-base-url")
     parser.add_argument("--qa-api-key")
     parser.add_argument("--embedding-model", default="text-embedding-3-small")

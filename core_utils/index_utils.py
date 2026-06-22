@@ -59,7 +59,7 @@ def create_or_load_kg_index(nodes, graph_store, index_type="KnowledgeGraphIndex"
                 include_embeddings=True,
                 max_object_length=1000,
             )
-        elif index_type == "KnowledgeGraphIndex":  # standard KnowledgeGraphIndex (for HybridContextQA)
+        elif index_type == "KnowledgeGraphIndex":  # standard KnowledgeGraphIndex
             default_prompt = PromptTemplate(
                 cs_prompts.DEFAULT_KG_TRIPLET_EXTRACT_TMPL_3,
                 prompt_type=PromptType.KNOWLEDGE_TRIPLET_EXTRACT

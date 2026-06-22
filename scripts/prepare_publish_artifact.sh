@@ -40,6 +40,7 @@ rsync -av --delete --delete-excluded \
   --exclude 'Neo4j-*.txt' \
   --exclude 'workspace_docs' \
   --exclude 'experiments_report.md' \
+  --exclude 'HybridContextQ[A]' \
   --exclude 'docs/papers' \
   --exclude 'data/*.pdf' \
   --exclude 'data/*.py' \
