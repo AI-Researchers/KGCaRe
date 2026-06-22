@@ -1,0 +1,11 @@
+openai
+pydantic
+python-dotenv
+faiss-cpu
+neo4j
+numpy
+tiktoken
+beautifulsoup4
+tqdm
+ujson
+pytest

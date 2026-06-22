@@ -1,0 +1,56 @@
+# Python/runtime artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.deepeval/
+
+# Local environments
+.venv/
+venv/
+env/
+vllm-qwen36/
+
+# Local/editor state
+.codex
+.agents/
+.DS_Store
+*.swp
+
+# Credentials and local service files
+.env
+.env.*
+Neo4j-*.txt
+*.pem
+*.key
+
+# Private notes / copied source papers
+workspace_docs/
+experiments_report.md
+docs/papers/
+data/*.pdf
+
+# Generated experiment artifacts
+outputs/
+outputs_final/
+storage/
+**/adapter_runs/
+**/outputs/
+**/indexes/
+**/workspaces/
+**/adapter_data/
+**/lightrag_cache/
+**/llm_cache/
+lightRAG/adapters/.../
+HippoRAG/reproduce/dataset/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.zip
+
+# Nested upstream repository metadata
+**/.git/
